@@ -20,4 +20,4 @@ RewriteRule ^$ /public/ [L]
 
 # Rewrite all other requests to go to the public folder (without exposing /public in the URL)
 RewriteCond %{REQUEST_URI} !^/public/
-RewriteRule ^(.*)$ /public/$1 [L]
+RewriteRule ^(.*)$ /public/$1 [L] 
