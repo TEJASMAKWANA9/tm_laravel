@@ -21,4 +21,4 @@ jobs:
         port: ${{ secrets.FTP_PORT }}
         protocol: ftp
         server-dir: ${{ secrets.FTP_PATH }}
-        local-dir: ./
+        local-dir: ./ 
