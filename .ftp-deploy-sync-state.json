@@ -1,0 +1,13 @@
+{
+    "description": "DO NOT DELETE THIS FILE. This file is used to keep track of which files have been synced in the most recent deployment. If you delete this file a resync will need to be done (which can take a while) - read more: https://github.com/SamKirkland/FTP-Deploy-Action",
+    "version": "1.0.0",
+    "generatedTime": 1765539756221,
+    "data": [
+        {
+            "type": "file",
+            "name": "Hello.php",
+            "size": 4,
+            "hash": "cc3c8917cfcec641582a143e23364b84895bd20e8483a8d93c08c3a860cd2949"
+        }
+    ]
+}
