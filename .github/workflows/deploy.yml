@@ -13,15 +13,21 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: FTP Deploy
+      - name: FTP Deploy Laravel Full Project
         uses: SamKirkland/FTP-Deploy-Action@v4.3.2
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          
-          # Laravel public folder upload
-          local-dir: ./public
 
-          # Upload destination folder on InfinityFree
+          # GitHub repo root = Laravel root
+          local-dir: ./
+
+          # Upload to this folder on InfinityFree
           server-dir: /htdocs/new/
+
+          exclude: |
+            .git/**
+            node_modules/**
+            vendor/**
+            .env
