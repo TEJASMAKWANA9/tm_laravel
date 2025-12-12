@@ -1,16 +1,23 @@
-# To prevent access to .env and other files
+# Prevent access to .env and other sensitive files
 <Files .*>
-# Apache 2.2
-<IfModule !mod_authz_core.c>
-Order deny,allow
-Deny from all
-</IfModule>
-# Apache 2.4
-<IfModule mod_authz_core.c>
-Require all denied
-</IfModule>
+  # Apache 2.2
+  <IfModule !mod_authz_core.c>
+  Order deny,allow
+  Deny from all
+  </IfModule>
+  # Apache 2.4
+  <IfModule mod_authz_core.c>
+  Require all denied
+  </IfModule>
 </Files>
 
-<IfModule mod_alias.c>
-RedirectMatch 301 ^/new/$ http://tejaswebsolution.free.nf/new/public
-</IfModule>
+# Enable URL rewriting
+RewriteEngine On
+
+# If the request is for the root URL, redirect to the public directory (without showing /public)
+RewriteCond %{REQUEST_URI} ^/$
+RewriteRule ^$ /public/ [L]
+
+# Rewrite all other requests to go to the public folder (without exposing /public in the URL)
+RewriteCond %{REQUEST_URI} !^/public/
+RewriteRule ^(.*)$ /public/$1 [L]
