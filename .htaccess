@@ -1,23 +1,17 @@
-# Prevent access to .env and other sensitive files
-<Files .*>
-  # Apache 2.2
-  <IfModule !mod_authz_core.c>
-  Order deny,allow
-  Deny from all
-  </IfModule>
-  # Apache 2.4
-  <IfModule mod_authz_core.c>
+# Prevent access to hidden files (e.g., .env, .git, .htaccess, etc.)
+<FilesMatch "^\.">
   Require all denied
-  </IfModule>
-</Files>
+</FilesMatch>
 
 # Enable URL rewriting
 RewriteEngine On
+RewriteBase /new/
 
-# If the request is for the root URL, redirect to the public directory (without showing /public)
+# If the request is for the root URL, internally redirect to /public (without showing /public in the URL)
 RewriteCond %{REQUEST_URI} ^/$
-RewriteRule ^$ /public/ [L]
+RewriteRule ^$ /new/public/ [L]
 
-# Rewrite all other requests to go to the public folder (without exposing /public in the URL)
-RewriteCond %{REQUEST_URI} !^/public/
-RewriteRule ^(.*)$ /public/$1 [L] 
+# Redirect all other requests to the public folder (without exposing the /public folder in the URL)
+RewriteCond %{REQUEST_URI} !^/new/public/
+RewriteCond %{REQUEST_URI} !\.(png|jpg|jpeg|gif|css|js|woff2?|ttf|svg|eot|otf)$
+RewriteRule ^(.*)$ /new/public/$1 [L]
